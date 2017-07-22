@@ -29,3 +29,11 @@ app.post('/items', function(req,res) {				// Define a POST /items route
 		res.json(true);								// Return true (true has no meaning here, we easily could return the item we just created)
 	});
 });
+
+app.post('/items/remove', function(req,res) {
+	var item = req.body;
+	console.log('/items/remove: ', item);
+	Item.remove({_id:item._id}).then(function(result) {
+		res.json(result);
+	});
+});

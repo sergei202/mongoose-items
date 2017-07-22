@@ -23,6 +23,13 @@
 					});
 				};
 
+				$scope.removeItem = function(item) {
+					console.log('removeItem() item=', item);
+					$http.post('/items/remove', item).then(function() {
+						getItems();
+					});
+				};
+
 			});
 		</script>
 	</head>
@@ -53,13 +60,17 @@
 							<tr>
 								<th>Name</th>
 								<th>Qty</th>
+								<th></th>
 							</tr>
 							<tr ng-repeat="item in items">        <!-- Loop through items -->
 								<td>{{item.name}}</td>
 								<td>{{item.qty}}</td>
+								<td class="text-danger text-right" ng-click="removeItem(item)">
+									X
+								</td>
 							</tr>
 							<tr ng-if="!items.length">
-								<td colspan="2" class="text-center text-warning">No items exist</td>
+								<td colspan="3" class="text-center text-warning">No items exist</td>
 							</tr>
 						</table>
 					</div>
